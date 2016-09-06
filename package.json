@@ -19,12 +19,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ichiwa/docker-nodejs.git"
+    "url": "git+https://github.com:ichiwa/docker-compose-nodejs6-express4-environment-template.git"
   },
   "author": "ichiwa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ichiwa/docker-nodejs/issues"
+    "url": "https://github.com:ichiwa/docker-compose-nodejs6-express4-environment-template.git/issues"
   },
-  "homepage": "https://github.com/ichiwa/docker-nodejs#readme"
+  "homepage": "https://github.com:ichiwa/docker-compose-nodejs6-express4-environment-template.git#readme",
+  "devDependencies": {}
 }
