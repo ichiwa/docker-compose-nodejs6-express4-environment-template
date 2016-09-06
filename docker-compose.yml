@@ -1,0 +1,56 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    links:
+      - nodejs_app
+    ports:
+      - "80:80"
+    volumes:
+      - "./docker/etc/nginx/conf.d:/etc/nginx/conf.d"
+
+  nodejs_app:
+    build: .
+    container_name: nodejs_app
+    hostname: nodejs_app
+    expose:
+      - 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+    env_file: .env
+    links:
+      - mysql
+      - redis
+      - memcached
+      
+  redis:
+    image: redis:alpine
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_USER=ichiwa"
+    volumes:
+    #  - "./docker/var/lib/mysql:/var/lib/mysql" # If you use in mac, comment out this line.
+      - "./docker/etc/mysql/conf.d:/etc/mysql/conf.d"
+
+  memcached:
+    image: memcached:alpine
+    container_name: memcached
+    hostname: memcached
+    ports:
+      - '11211:11211'
