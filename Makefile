@@ -12,14 +12,16 @@ ifeq (install,$(firstword $(MAKECMDGOALS)))
 endif
 # boot containers
 install: ## Create VM and containers : ## make install
-	@echo "===> Install started... \n\n" && \
+	@echo "\n ===> Install started... \n" && \
 	[ $(docker-machine status $(DOCKER_MACHINE_NAME)) ] || \
 	docker-machine create -d virtualbox \
 			--virtualbox-cpu-count $(DOCKER_MACHINE_CPU) \
 			--virtualbox-memory $(DOCKER_MACHINE_MEMORY) \
 			$(DOCKER_MACHINE_NAME) || true && \
-	echo "===> Create containers..."
-	docker-compose -f docker-compose.yml build
+	echo "\n ===> start docker-machine \n" && \
+	docker-machine start $(DOCKER_MACHINE_NAME) || true && \
+	echo "\n ===> docker-machine env $(DOCKER_MACHINE_NAME)" && \
+	docker-machine env $(DOCKER_MACHINE_NAME) || true
 
 # remove virtual machine
 destroy: ## Warn! Destroy virtual machine : ## make destroy
