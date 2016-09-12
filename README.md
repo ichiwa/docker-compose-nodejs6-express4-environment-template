@@ -28,7 +28,7 @@ export DOCKER_MACHINE_NAME="default"
 # eval $(docker-machine env default)
 
 user% eval $(docker-machine env default)
-user% 
+
 user% make start
 docker-compose -f docker-compose.yml -p nodejs up -d  --build
 Building nodejs_app
