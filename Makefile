@@ -5,23 +5,23 @@ DOCKER_MACHINE_NAME = default
 DOCKER_MACHINE_CPU = 4
 DOCKER_MACHINE_MEMORY = 4096
 
-.PHONY: install
-ifeq (install,$(firstword $(MAKECMDGOALS)))
-  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-  $(eval $(RUN_ARGS):;@:)
-endif
-# boot containers
-install: ## Create VM and containers : ## make install
-	@echo "\n ===> Install started... \n" && \
-	[ $(docker-machine status $(DOCKER_MACHINE_NAME)) ] || \
-	docker-machine create -d virtualbox \
-			--virtualbox-cpu-count $(DOCKER_MACHINE_CPU) \
-			--virtualbox-memory $(DOCKER_MACHINE_MEMORY) \
-			$(DOCKER_MACHINE_NAME) || true && \
-	echo "\n ===> start docker-machine \n" && \
-	docker-machine start $(DOCKER_MACHINE_NAME) || true && \
-	echo "\n ===> docker-machine env $(DOCKER_MACHINE_NAME)" && \
-	docker-machine env $(DOCKER_MACHINE_NAME) || true
+# .PHONY: install
+# ifeq (install,$(firstword $(MAKECMDGOALS)))
+#   RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+#   $(eval $(RUN_ARGS):;@:)
+# endif
+# # boot containers
+# install: ## Create VM and containers : ## make install
+# 	@echo "\n ===> Install started... \n" && \
+# 	[ $(docker-machine status $(DOCKER_MACHINE_NAME)) ] || \
+# 	docker-machine create -d virtualbox \
+# 			--virtualbox-cpu-count $(DOCKER_MACHINE_CPU) \
+# 			--virtualbox-memory $(DOCKER_MACHINE_MEMORY) \
+# 			$(DOCKER_MACHINE_NAME) || true && \
+# 	echo "\n ===> start docker-machine \n" && \
+# 	docker-machine start $(DOCKER_MACHINE_NAME) || true && \
+# 	echo "\n ===> docker-machine env $(DOCKER_MACHINE_NAME)" && \
+# 	docker-machine env $(DOCKER_MACHINE_NAME) || true
 
 # remove virtual machine
 destroy: ## Warn! Destroy virtual machine : ## make destroy
